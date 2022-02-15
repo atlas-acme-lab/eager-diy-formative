@@ -14,8 +14,8 @@
     <script src="index.js"></script>
   </head>
   <body>
-    <!-- <section id="beholder-root" class="hidden"></section> -->
-    <section id="beholder-root"></section>
+    <section id="beholder-root" class="hidden"></section>
+    <!-- <section id="beholder-root"></section> -->
 
     <section id="landing-view" class="view-section">
       <img class="half-page-svg" src="./img/start_screen_preview.svg">
@@ -24,7 +24,10 @@
     </section>
 
     <section id="scan-view" class="view-section offscreen">
-      <img class="half-page-svg" src="./img/tinycade_side_view.svg">
+      <img id="scan-gif-1" class="half-page-svg" src="./img/scan-1.gif">
+      <img id="scan-gif-2" class="half-page-svg hidden" src="./img/scan-2.gif">
+      <img id="scan-gif-3" class="half-page-svg hidden" src="./img/scan-complete.gif">
+
       <p id="scan-tip">Flip the paper template, place it on the panel, and press SCAN.</p>
       <button id="activate-scan">SCAN</button>
       <button id="activate-chart" class="hidden">START</button>
@@ -35,7 +38,7 @@
       <button id="pause-detection"><img src="./img/pause.svg"></button>
 
       <h1 id="chart-title">Quantity of Fruits</h1>
-      <canvas id="scanned-chart-title" class="hidden" width=500 height=50></canvas>
+      <canvas id="scanned-chart-title" class="hidden" width=330 height=30></canvas>
 
       <div id="chart-bars">
         <div id="bar-0" class="chart-bar"><span class="bar-val">0</span></div>
@@ -64,7 +67,7 @@
         <img class="fruit-icon" src="./img/fruit/orange.svg" alt="Large Red apple vector drawing">
         <img class="fruit-icon" src="./img/fruit/green-lemon.svg" alt="Large Red apple vector drawing">
       </div>
-      <canvas id="scanned-chart-icons" class="hidden" width=500 height=70></canvas>
+      <canvas id="scanned-chart-icons" class="hidden" width=310 height=30></canvas>
 
     </section>
   </body>

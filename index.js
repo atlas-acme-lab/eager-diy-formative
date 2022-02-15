@@ -38,7 +38,7 @@ let iconsCanvas, iconsCtx, titleCanvas, titleCtx;
 
 const markerMoveThreshold = 5;
 // TODO: init these to be y min
-const markerMap = [2,7,1,0,5];
+const markerMap = [8,7,0,2,1];
 const markerPositions = [0,0,0,0,0];
 const markerOrigins = [0,0,0,0,0];
 let markerYMax = 0;
@@ -74,10 +74,9 @@ function updateController() {
       if (Math.abs(newOffset - markerPositions[i]) > markerMoveThreshold) {
         markerPositions[i] = newOffset;
         let sliderVal = newOffset / (markerYMax - markerOrigins[i]);
-        // console.log(sliderVal);
       
         // do marker mapping here
-        if (isDIY) setBar(i, Math.round(20 * sliderVal), 20);
+        if (isDIY) setBar(i, Math.round(100 * sliderVal), 100);
         else setBar(i, Math.round(4 * sliderVal), 4);
       }
 
@@ -101,6 +100,9 @@ function updateController() {
       isScan = false;
       document.querySelector('#activate-scan').classList.add('hidden');
       document.querySelector('#activate-chart').classList.remove('hidden');
+      document.querySelector('#scan-gif-1').classList.add('hidden');
+      document.querySelector('#scan-gif-2').classList.add('hidden');
+      document.querySelector('#scan-gif-3').classList.remove('hidden');
 
       document.querySelector('#scan-tip').innerHTML = "Scanning Complete! Flip the template again, and press START.";
     }
@@ -147,12 +149,16 @@ function activateDIYChart() {
   document.querySelector('#scanned-chart-title').classList.remove('hidden');
   document.querySelector('#scanned-chart-icons').classList.remove('hidden');
 
+  document.querySelector('#scan-gif-1').classList.remove('hidden');
+  document.querySelector('#scan-gif-2').classList.add('hidden');
+  document.querySelector('#scan-gif-3').classList.add('hidden');
+
   // set the scale
   document.querySelector('#y-axis-labels').innerHTML = `
-    <span>20</span>
-    <span>15</span>
-    <span>10</span>
-    <span>5</span>
+    <span>100</span>
+    <span>75</span>
+    <span>50</span>
+    <span>25</span>
     <span>0</span>
   `;
 
@@ -169,8 +175,12 @@ function runScan() {
 
   // this is where the html should be edited
   document.querySelector('#activate-scan').classList.add('disabled');
-  iconsCtx.drawImage(Beholder.getVideo(), -250, -70, 640, 480);
-  titleCtx.drawImage(Beholder.getVideo(), -250, -320, 640, 480);
+  document.querySelector('#scan-gif-1').classList.add('hidden');
+  document.querySelector('#scan-gif-2').classList.remove('hidden');
+  document.querySelector('#scan-gif-3').classList.add('hidden');
+
+  iconsCtx.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
+  titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
 }
 
 function returnHome() {
@@ -194,7 +204,7 @@ function activateDIY() {
   isScan = false;
 }
 
-const maxVH = 47;
+const maxVH = 52;
 // css val 0vh - 47vh
 // Scale is 0 - 20 for now or 0 - 4
 function setBar(id, val, max) {
@@ -249,10 +259,6 @@ window.onload = () => {
 
 /** TODO:
  * 
- * ! Beholder slider movement triggers bar change
  * ! Use proper marker and cam sample area values
- * ! use right slider scale
  * 
- * ! Put in scan gifs
- * ? Tighten up styles
  */
