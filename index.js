@@ -2,8 +2,8 @@ const Beholder = window['beholder-detection'].default;
 let config = {
   camera_params: {
     videoSize: 1, // The video size values map to the following [320 x 240, 640 x 480, 1280 x 720, 1920 x 1080]
-    rearCamera: false, // Boolean value for defaulting to the rear facing camera. Only works on mobile
-    torch: false, // Boolean value for if torch/flashlight is on. Only works for rear facing mobile cameras. Can only be set from init
+    rearCamera: true, // Boolean value for defaulting to the rear facing camera. Only works on mobile
+    torch: true, // Boolean value for if torch/flashlight is on. Only works for rear facing mobile cameras. Can only be set from init
   },
   detection_params: {
     minMarkerDistance: 2,
@@ -31,14 +31,17 @@ const bars = [];
 let hideNumTimer = false;
 let updateTimer = 30; // cap updates
 let prevTime = Date.now();
-let runDetection = false;
+let runDetection = true;
 let isScan = false;
 let isDIY = false;
 let iconsCanvas, iconsCtx, titleCanvas, titleCtx;
 
 const markerMoveThreshold = 5;
 // TODO: init these to be y min
+const markerMap = [2,7,1,0,5];
 const markerPositions = [0,0,0,0,0];
+const markerOrigins = [0,0,0,0,0];
+let markerYMax = 0;
 
 function clamp(min, max, v) {
   if (v < min) return min;
@@ -54,12 +57,37 @@ function updateController() {
 
   if (runDetection) {
     Beholder.update();
-    // do marker mapping here
-    if (isDIY) {
-      // diy mapping scale is 0 - 20
-    } else {
-      // otherwise scale is 0 - 4
+    // console.log(Beholder.getMarker(5).center.y - markerOrigins[4]);
+
+    for (let i = 0; i < 5; i++) {
+      let currMarker = Beholder.getMarker(markerMap[i]);
+      // capture origin
+      if (markerOrigins[i] === 0 && currMarker.center.i != 0 && i != 2) {
+        markerOrigins[i] = currMarker.center.y;
+      }
+
+      if (i === 2 && markerYMax === 0 && currMarker.center.y !== 0) {
+        markerYMax = currMarker.center.y;
+      }
+
+      let newOffset = currMarker.center.y - markerOrigins[i];
+      if (Math.abs(newOffset - markerPositions[i]) > markerMoveThreshold) {
+        markerPositions[i] = newOffset;
+        let sliderVal = newOffset / (markerYMax - markerOrigins[i]);
+        // console.log(sliderVal);
+      
+        // do marker mapping here
+        if (isDIY) setBar(i, Math.round(20 * sliderVal), 20);
+        else setBar(i, Math.round(4 * sliderVal), 4);
+      }
+
+      // center slider should be at top to calibrate
+      if (markerOrigins[2] == 0 && markerOrigins[1] != 0 && markerOrigins[3] != 0) {
+        markerOrigins[2] = (markerOrigins[1] + markerOrigins[3]) / 2;
+      }
     }
+
+    
   }
 
   if (!isScan && hideNumTimer < 0) bars.forEach((b) => b.classList.add('hide-num'));
@@ -73,9 +101,10 @@ function updateController() {
       isScan = false;
       document.querySelector('#activate-scan').classList.add('hidden');
       document.querySelector('#activate-chart').classList.remove('hidden');
+
+      document.querySelector('#scan-tip').innerHTML = "Scanning Complete! Flip the template again, and press START.";
     }
   }
-    
   requestAnimationFrame(updateController);
 }
 
@@ -136,16 +165,19 @@ function runScan() {
   isScan = true;
   scanTimer = 3000;
 
+  document.querySelector('#scan-tip').innerHTML = "Please wait, your chart is being scanned...";
+
   // this is where the html should be edited
   document.querySelector('#activate-scan').classList.add('disabled');
-  iconsCtx.drawImage(Beholder.getVideo(), 0, 0, 640, 480);
+  iconsCtx.drawImage(Beholder.getVideo(), 0, -300, 640, 480);
+  titleCtx.drawImage(Beholder.getVideo(), 0, -100, 640, 480);
 }
 
 function returnHome() {
   document.querySelector('#chart-view').classList.add('offscreen');
   document.querySelector('#scan-view').classList.add('offscreen');
 
-  runDetection = false;
+  runDetection = true;
   isScan = false;
   isDIY = false;
 }
@@ -159,14 +191,14 @@ function activateDIY() {
   document.querySelector('#activate-chart').classList.add('hidden');
 
   runDetection = true;
-  isScan = true;
+  isScan = false;
 }
 
 const maxVH = 47;
 // css val 0vh - 47vh
 // Scale is 0 - 20 for now or 0 - 4
-function setBar(id, val, proportion) {
-  bars[id].style = `height:${maxVH * proportion}vh`;
+function setBar(id, val, max) {
+  bars[id].style = `height:${maxVH * val / max}vh`;
   bars[id].querySelector('.bar-val').innerHTML = val;
   
   bars[id].classList.remove('hide-num');
@@ -216,14 +248,11 @@ window.onload = () => {
 }
 
 /** TODO:
- * Scan complete start chart
- * - sample from webcam areas
  * 
- * Beholder stuffs run
- * On change in marker
- * Use proper marker and cam sample area values
- * use right slider scale?
+ * ! Beholder slider movement triggers bar change
+ * ! Use proper marker and cam sample area values
+ * ! use right slider scale
  * 
- * Put in scan gifs
- * Tighten up styles
+ * ! Put in scan gifs
+ * ? Tighten up styles
  */
