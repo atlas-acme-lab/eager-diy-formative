@@ -169,8 +169,8 @@ function runScan() {
 
   // this is where the html should be edited
   document.querySelector('#activate-scan').classList.add('disabled');
-  iconsCtx.drawImage(Beholder.getVideo(), 0, -300, 640, 480);
-  titleCtx.drawImage(Beholder.getVideo(), 0, -100, 640, 480);
+  iconsCtx.drawImage(Beholder.getVideo(), -250, -70, 640, 480);
+  titleCtx.drawImage(Beholder.getVideo(), -250, -320, 640, 480);
 }
 
 function returnHome() {

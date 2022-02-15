@@ -107,7 +107,7 @@ button {
 
 .chart-bar {
   border-radius: 2px;
-  transition: height 800ms ease-in-out, color 300ms ease-out;
+  transition: height 300ms ease-in-out, color 300ms ease-out;
   position: relative;
   height: 0vh;
   width: 30px;
@@ -252,6 +252,8 @@ button {
   left: calc(50vw - 250px);
   top: 15px;
   background-color: #000;
+
+  transform: scaleX(-1) scaleY(-1);
 }
 
 #scanned-chart-icons {
@@ -259,4 +261,5 @@ button {
   left: calc(50vw - 250px);
   bottom: 45px;
   background-color: #000;
+  transform: scaleX(-1) scaleY(-1);
 }
