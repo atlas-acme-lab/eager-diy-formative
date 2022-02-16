@@ -82,7 +82,7 @@ function updateController() {
         let sliderVal = newOffset / (markerYMax - markerOrigins[i]);
       
         // do marker mapping here
-        if (isDIY) setBar(i, Math.round(100 * sliderVal), 100);
+        if (isDIY) setBar(i, Math.round(10 * sliderVal) * 10, 100);
         else setBar(i, Math.round(4 * sliderVal), 4);
       }
 
