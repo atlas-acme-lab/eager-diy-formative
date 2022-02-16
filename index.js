@@ -36,7 +36,7 @@ let isScan = false;
 let isDIY = false;
 let iconsCanvas, iconsCtx, titleCanvas, titleCtx;
 
-const markerMoveThreshold = 5;
+const markerMoveThreshold = 1.5;
 // TODO: init these to be y min
 const markerMap = [8,7,0,2,1];
 const markerPositions = [0,0,0,0,0];
@@ -50,13 +50,19 @@ function clamp(min, max, v) {
 }
 
 let scanTimer = 3000;
+const UPDATE_WINDOW = 1000 / 20;
+let beholderUpdateTimer = UPDATE_WINDOW;
 function updateController() {
   let currTime = Date.now();
   let dt = currTime - prevTime;
   prevTime = currTime;
 
   if (runDetection) {
-    Beholder.update();
+    beholderUpdateTimer -= dt;
+    if (beholderUpdateTimer < 0) {
+      Beholder.update();
+      beholderUpdateTimer = UPDATE_WINDOW;
+    }
     // console.log(Beholder.getMarker(5).center.y - markerOrigins[4]);
 
     for (let i = 0; i < 5; i++) {
