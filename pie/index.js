@@ -27,7 +27,11 @@ let config = {
   },
 };
 
+let appState = 'MAIN'; //'CHART', 'SCAN'
+
 const bars = [];
+let chartCanvas;
+let chartCtx;
 let hideNumTimer = false;
 let updateTimer = 30; // cap updates
 let prevTime = Date.now();
@@ -35,86 +39,6 @@ let runDetection = true;
 let isScan = false;
 let isDIY = false;
 let iconsCanvas, iconsCtx, titleCanvas, titleCtx;
-
-const markerMoveThreshold = 1.5;
-// TODO: init these to be y min
-const markerMap = [8,7,0,2,1];
-const markerPositions = [0,0,0,0,0];
-const markerOrigins = [0,0,0,0,0];
-let markerYMax = 0;
-
-function clamp(min, max, v) {
-  if (v < min) return min;
-  if (v > max) return max;
-  return v;
-}
-
-let scanTimer = 3000;
-const UPDATE_WINDOW = 1000 / 20;
-let beholderUpdateTimer = UPDATE_WINDOW;
-function updateController() {
-  let currTime = Date.now();
-  let dt = currTime - prevTime;
-  prevTime = currTime;
-
-  if (runDetection) {
-    beholderUpdateTimer -= dt;
-    if (beholderUpdateTimer < 0) {
-      Beholder.update();
-      beholderUpdateTimer = UPDATE_WINDOW;
-    }
-    // console.log(Beholder.getMarker(5).center.y - markerOrigins[4]);
-
-    for (let i = 0; i < 5; i++) {
-      let currMarker = Beholder.getMarker(markerMap[i]);
-      // capture origin
-      if (markerOrigins[i] === 0 && currMarker.center.i != 0 && i != 2) {
-        markerOrigins[i] = currMarker.center.y;
-      }
-
-      if (i === 2 && markerYMax === 0 && currMarker.center.y !== 0) {
-        markerYMax = currMarker.center.y;
-      }
-
-      let newOffset = currMarker.center.y - markerOrigins[i];
-      if (Math.abs(newOffset - markerPositions[i]) > markerMoveThreshold) {
-        markerPositions[i] = newOffset;
-        let sliderVal = newOffset / (markerYMax - markerOrigins[i]);
-      
-        // do marker mapping here
-        if (isDIY) setBar(i, Math.round(10 * sliderVal) * 10, 100);
-        else setBar(i, Math.round(4 * sliderVal), 4);
-      }
-
-      // center slider should be at top to calibrate
-      if (markerOrigins[2] == 0 && markerOrigins[1] != 0 && markerOrigins[3] != 0) {
-        markerOrigins[2] = (markerOrigins[1] + markerOrigins[3]) / 2;
-      }
-    }
-
-    
-  }
-
-  if (!isScan && hideNumTimer < 0) bars.forEach((b) => b.classList.add('hide-num'));
-  else hideNumTimer -= dt;
-
-  if (isScan) {
-    // idk if anything happens here
-    scanTimer -= dt;
-
-    if (scanTimer < 0) {
-      isScan = false;
-      document.querySelector('#activate-scan').classList.add('hidden');
-      document.querySelector('#activate-chart').classList.remove('hidden');
-      document.querySelector('#scan-gif-1').classList.add('hidden');
-      document.querySelector('#scan-gif-2').classList.add('hidden');
-      document.querySelector('#scan-gif-3').classList.remove('hidden');
-
-      document.querySelector('#scan-tip').innerHTML = "Scanning Complete! Flip the template again, and press START.";
-    }
-  }
-  requestAnimationFrame(updateController);
-}
 
 function initController() {
   Beholder.init('#beholder-root', config);
@@ -130,14 +54,6 @@ function activateTutorial() {
   // hide user labels
   document.querySelector('#scanned-chart-title').classList.add('hidden');
   document.querySelector('#scanned-chart-icons').classList.add('hidden');
-
-  document.querySelector('#y-axis-labels').innerHTML = `
-    <span>4</span>
-    <span>3</span>
-    <span>2</span>
-    <span>1</span>
-    <span>0</span>
-  `;
 
   runDetection = true;
   isScan = false;
@@ -159,15 +75,6 @@ function activateDIYChart() {
   document.querySelector('#scan-gif-2').classList.add('hidden');
   document.querySelector('#scan-gif-3').classList.add('hidden');
 
-  // set the scale
-  document.querySelector('#y-axis-labels').innerHTML = `
-    <span>100</span>
-    <span>75</span>
-    <span>50</span>
-    <span>25</span>
-    <span>0</span>
-  `;
-
   runDetection = true;
   isDIY = true;
 }
@@ -184,9 +91,6 @@ function runScan() {
   document.querySelector('#scan-gif-1').classList.add('hidden');
   document.querySelector('#scan-gif-2').classList.remove('hidden');
   document.querySelector('#scan-gif-3').classList.add('hidden');
-
-  iconsCtx.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
-  titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
 }
 
 function returnHome() {
@@ -210,17 +114,6 @@ function activateDIY() {
   isScan = false;
 }
 
-const maxVH = 52;
-// css val 0vh - 47vh
-// Scale is 0 - 20 for now or 0 - 4
-function setBar(id, val, max) {
-  bars[id].style = `height:${maxVH * val / max}vh`;
-  bars[id].querySelector('.bar-val').innerHTML = val;
-  
-  bars[id].classList.remove('hide-num');
-  hideNumTimer = 1600;
-}
-
 window.onload = () => {
   document.addEventListener('keydown', (e) => {
     if (e.key == 'b') {
@@ -228,43 +121,28 @@ window.onload = () => {
     }
 
     if (e.key == 'p') {
-      setBar(0, 1, 5);
-      setBar(1, 2, 5);
-      setBar(2, 3, 5);
-      setBar(3, 4, 5);
-      setBar(4, 1, 5);
+      chartRegions[0].targetValue = 2 * Math.PI * 0.25;
+      chartRegions[1].targetValue = 2 * Math.PI * 0.15;
+      chartRegions[2].targetValue = 2 * Math.PI * 0.45;
+      chartRegions[3].targetValue = 2 * Math.PI * 0.05;
+      chartRegions[4].targetValue = 2 * Math.PI * 0.10;
     }
   });
-
-  bars.push(document.querySelector('#bar-0'));
-  bars.push(document.querySelector('#bar-1'));
-  bars.push(document.querySelector('#bar-2'));
-  bars.push(document.querySelector('#bar-3'));
-  bars.push(document.querySelector('#bar-4'));
 
   bars.forEach((b) => b.addEventListener('click', () => {
     b.classList.remove('hide-num');
     hideNumTimer = 1600;
   }))
-
+  chartCanvas = document.querySelector('#pie-chart');
+  chartCtx = chartCanvas.getContext('2d');
   initController();
   document.querySelector('#activate-tutorial').addEventListener('click', activateTutorial);
   // this toggle's it for now, no feedback tho
   document.querySelector('#pause-detection').addEventListener('click', () => (runDetection = !runDetection))
   document.querySelector('#return-home').addEventListener('click', returnHome);
-  // document.querySelector('#activate-diy-charts').addEventListener('click', activateDIY);
-  // document.querySelector('#activate-scan').addEventListener('click', runScan);
-  // document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
+  document.querySelector('#activate-diy-charts').addEventListener('click', activateDIY);
+  document.querySelector('#activate-scan').addEventListener('click', runScan);
+  document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
 
-  iconsCanvas = document.querySelector('#scanned-chart-icons');
-  iconsCtx = iconsCanvas.getContext('2d');
-
-  titleCanvas = document.querySelector('#scanned-chart-title');
-  titleCtx = titleCanvas.getContext('2d');
+  
 }
-
-/** TODO:
- * 
- * ! Use proper marker and cam sample area values
- * 
- */

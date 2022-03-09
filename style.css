@@ -54,6 +54,11 @@ button {
 
 #activate-tutorial {
   top: 15vh;
+
+  /* background: var(--theme-white);
+  border: 8px solid var(--theme-blue);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px; */
 }
 
 #activate-diy-charts {
@@ -158,6 +163,11 @@ button {
   top: 20px;
   padding: 17px;
   border-radius: 20px;
+
+  background: var(--theme-white);
+  border: 8px solid var(--theme-blue);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
 }
 #pause-detection {
   position: absolute;
@@ -279,4 +289,15 @@ button {
     width: 483px;
     height: 60px;
 }
+
+#pie-chart {
+  position: absolute;
+  left: calc(50vw - 250px);
+  top: calc(50vh - 150px);
+}
+
+#line-chart {
+  position: absolute;
+  left: calc(50vw - 250px);
+  top: calc(50vh - 150px);
 }
