@@ -252,9 +252,9 @@ window.onload = () => {
   // this toggle's it for now, no feedback tho
   document.querySelector('#pause-detection').addEventListener('click', () => (runDetection = !runDetection))
   document.querySelector('#return-home').addEventListener('click', returnHome);
-  // document.querySelector('#activate-diy-charts').addEventListener('click', activateDIY);
-  // document.querySelector('#activate-scan').addEventListener('click', runScan);
-  // document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
+  document.querySelector('#activate-diy-charts').addEventListener('click', activateDIY);
+  document.querySelector('#activate-scan').addEventListener('click', runScan);
+  document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
 
   iconsCanvas = document.querySelector('#scanned-chart-icons');
   iconsCtx = iconsCanvas.getContext('2d');
