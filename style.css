@@ -42,7 +42,7 @@ body {
   
 }
 
-button {
+#landing-view button, #scan-view button, #chart-view button {
   position: absolute;
   font-family: 'Mali';
 
