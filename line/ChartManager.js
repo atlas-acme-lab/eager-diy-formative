@@ -53,7 +53,7 @@ function updateController() {
         let sliderVal = newOffset / (markerYMax - markerOrigins[i]);
       
         // do marker mapping here
-        chartRegions[i].value = sliderVal;
+        chartRegions[i].targetValue = sliderVal;
         // if (isDIY) setBar(i, Math.round(10 * sliderVal) * 10, 100);
         // else setBar(i, Math.round(4 * sliderVal), 4);
       }
