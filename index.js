@@ -91,8 +91,6 @@ function updateController() {
         markerOrigins[2] = (markerOrigins[1] + markerOrigins[3]) / 2;
       }
     }
-
-    
   }
 
   if (!isScan && hideNumTimer < 0) bars.forEach((b) => b.classList.add('hide-num'));
@@ -211,11 +209,9 @@ function activateDIY() {
   isScan = false;
 }
 
-const maxVH = 52;
-// css val 0vh - 47vh
-// Scale is 0 - 20 for now or 0 - 4
+const maxVH = 180;
 function setBar(id, val, max) {
-  bars[id].style = `height:${maxVH * val / max}vh`;
+  bars[id].style = `height:${maxVH * val / max}px`;
   bars[id].querySelector('.bar-val').innerHTML = val;
   
   bars[id].classList.remove('hide-num');
@@ -229,6 +225,7 @@ window.onload = () => {
     }
 
     if (e.key == 'p') {
+      console.log('test');
       setBar(0, 1, 5);
       setBar(1, 2, 5);
       setBar(2, 3, 5);

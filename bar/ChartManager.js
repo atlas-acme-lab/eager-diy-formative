@@ -108,3 +108,8 @@ function updateChart(dt) {
 // titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
 
 
+// what to walk through
+
+// the code
+// beholder
+// how to deploy

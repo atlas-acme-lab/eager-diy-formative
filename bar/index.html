@@ -15,7 +15,11 @@
     <script src="ChartManager.js"></script>
     <script src="index.js"></script>
 
-    <style>    
+    <style>
+      html {
+        --top-padding: 20px;
+      }
+
       .img-src-1 {
         background-image: url("../img/scan-1.gif");
       }  
@@ -23,7 +27,7 @@
       #bar-chart {
         position: absolute;
         left: calc(50vw - 300px);
-        top: calc(50vh - 175px);
+        top: calc(50vh - 150px);
         border: 1px dashed darkgrey;
       }
 
@@ -40,6 +44,9 @@
         height: 100vh;
       }
 
+      #chart-num {
+
+      }
 
     </style>
   </head>
@@ -59,16 +66,13 @@
       <p id="tutorial-instructions"></p>
     </section>
 
-    <section class="grid-container hidden" id="setup">
-      <!-- <a href="../index.html" id="home">Home</a> -->
-      <h1>Chart Setup</h1>
-
-    </section>
 
     <section>
       <a href="../index.html" id="home">Home</a>
 
-      <canvas id="bar-chart" width="600" height="350"></canvas>
+
+      <canvas id="bar-chart" width="600" height="300"></canvas>
+      <input id="chart-num" value="100"/>
 
     </section>
 
