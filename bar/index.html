@@ -10,13 +10,41 @@
 
     <link rel="stylesheet" href="../main.css">
     <link rel="stylesheet" href="../tutorial.css">
+    <script src="https://unpkg.com/beholder-detection@1.3.0/dist/beholder-detection.js"></script>
+
+    <script src="ChartManager.js"></script>
+    <script src="index.js"></script>
+
     <style>    
       .img-src-1 {
         background-image: url("../img/scan-1.gif");
       }  
+
+      #bar-chart {
+        position: absolute;
+        left: calc(50vw - 300px);
+        top: calc(50vh - 175px);
+        border: 1px dashed darkgrey;
+      }
+
+      #home {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+      }
+
+      .full-page-section {
+        position: relative;
+        padding: 10px;
+        width: 100vw;
+        height: 100vh;
+      }
+
+
     </style>
   </head>
   <body>
+    <div id="beholder-root"></div>
     <section class="grid-container hidden" id="instructions">
       <!-- <a href="../index.html" id="home">Home</a> -->
       <h1>Make Your Own DIY Chart</h1>
@@ -37,10 +65,10 @@
 
     </section>
 
-    <section class="grid-container">
+    <section>
       <a href="../index.html" id="home">Home</a>
 
-
+      <canvas id="bar-chart" width="600" height="350"></canvas>
 
     </section>
 

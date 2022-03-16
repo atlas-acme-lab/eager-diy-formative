@@ -185,6 +185,7 @@ function runScan() {
   document.querySelector('#scan-gif-2').classList.remove('hidden');
   document.querySelector('#scan-gif-3').classList.add('hidden');
 
+  // THIS IS ALL YOU NEED FOR SCAN
   iconsCtx.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
   titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
 }

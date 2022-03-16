@@ -1,7 +1,6 @@
 const Beholder = window['beholder-detection'].default;
 const maxVH = 52;
 
-const bars = [];
 let config = {
   camera_params: {
     videoSize: 1, // The video size values map to the following [320 x 240, 640 x 480, 1280 x 720, 1920 x 1080]
@@ -50,28 +49,18 @@ function initController() {
 
 
 window.onload = () => {
-  bars.push(document.querySelector('#bar-0'));
-  bars.push(document.querySelector('#bar-1'));
-  bars.push(document.querySelector('#bar-2'));
-  bars.push(document.querySelector('#bar-3'));
-  bars.push(document.querySelector('#bar-4'));
   document.addEventListener('keydown', (e) => {
-    if (e.key == 'b') {
-      document.querySelector('#beholder-root').classList.toggle('hidden');
-    }
 
     if (e.key == 'p') {
-      setBar(0, 1, 5);
-      setBar(1, 2, 5);
-      setBar(2, 3, 5);
-      setBar(3, 4, 5);
-      setBar(4, 1, 5);
+      chartRegions[0].targetValue = 0.25;
+      chartRegions[1].targetValue = 0.15;
+      chartRegions[2].targetValue = 0.65;
+      chartRegions[3].targetValue = 0.75;
+      chartRegions[4].targetValue = 0.10;
     }
   });
 
-  bars.forEach((b) => b.addEventListener('click', () => {
-    b.classList.remove('hide-num');
-    hideNumTimer = 1600;
-  }))
+  chartCanvas = document.querySelector('#bar-chart');
+  chartCtx = chartCanvas.getContext('2d');
   initController();
 }
