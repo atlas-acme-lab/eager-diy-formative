@@ -34,7 +34,6 @@ let config = {
 };
 
 const bars = [];
-let hideNumTimer = false;
 let updateTimer = 30; // cap updates
 let prevTime = Date.now();
 let runDetection = true;
@@ -45,18 +44,11 @@ const maxVH = 180;
 
 const markerMoveThreshold = 1.5;
 // TODO: init these to be y min
+//Sandra's comment: idk why they are here
 const markerMap = [8, 7, 0, 2, 1];
 const markerPositions = [0, 0, 0, 0, 0];
 const markerOrigins = [0, 0, 0, 0, 0];
 let markerYMax = 0;
-
-function setBar(id, val, max) {
-  bars[id].style = `height:${maxVH * val / max}px`;
-  bars[id].querySelector('.bar-val').innerHTML = val;
-
-  bars[id].classList.remove('hide-num');
-  hideNumTimer = 1600;
-}
 
 window.onload = () => {
   document.addEventListener('keydown', (e) => {

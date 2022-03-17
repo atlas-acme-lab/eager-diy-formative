@@ -117,7 +117,7 @@ body {
 
 #chart-title {
   text-align: center;
-  padding-top: 5px;
+  padding-top: 20px;
   font-size: 36px;
   letter-spacing: 3px;
 }
@@ -126,12 +126,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  width: 300px;
-  height: 180px;
+  width: 406px;
+  height: 250px;
   gap: 30px;
   position: absolute;
   top: 93px;
-  left: calc(50vw - 150px);
+  left: calc(50vw - 206px);
+  background-color: red;
 }
 
 #bar-0 {
@@ -179,7 +180,7 @@ body {
 #chart-icons {
   display: flex;
   position: absolute;
-  top: 285px;
+  top: 365px;
   justify-content: center;
   width: 100vw;
 }
@@ -224,21 +225,21 @@ body {
 #x-axis {
   position: absolute;
   height: 6px;
-  left: calc(50vw - 160px);
-  width: 320px;
-  top: 266px;
+  left: calc(50vw - 206px);
+  width: 407px;
+  top: 342px;
   background-color: black;
 }
 
 #y-axis {
   position: absolute;
-  height: 215px;
-  top: 84px;
-  left: calc(50vw - 150px);
+  height: 400px;
+  top: 90px;
+  left: calc(50vw - 213px);
 }
 
 #y-bar {
-  height: 185px;
+  height: 258px;
   width: 1.5vh;
   background-color: black;
   position: absolute;
@@ -251,7 +252,7 @@ body {
   flex-flow: column;
   position: absolute;
   top: -20.8px;
-  gap: 5.2px;
+  gap: 23.6px;
   left: -20px;
 }
 

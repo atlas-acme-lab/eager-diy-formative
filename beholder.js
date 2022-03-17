@@ -1,7 +1,16 @@
 const UPDATE_WINDOW = 1000 / 20;
 let beholderUpdateTimer = UPDATE_WINDOW;
+let hideNumTimer = false;
 const referenceMarkerBot = 16;
 const referenceMarkerTop = 17;
+
+function setBar(id, val, max) {
+  bars[id].style = `height:${maxVH * val / max}px`;
+  bars[id].querySelector('.bar-val').innerHTML = val;
+
+  bars[id].classList.remove('hide-num');
+  hideNumTimer = 1600;
+}
 
 function clamp(min, max, v) {
   if (v < min) return min;
