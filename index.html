@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
 
 <head>
@@ -16,15 +16,28 @@
 </head>
 
 <body>
-  <!--foo-->
   <!-- <section id="beholder-root" class="hidden"></section> -->
   <section id="beholder-root" style="position: absolute; top: 20%"></section>
 
   <section id="landing-view" class="view-section">
-    <img class="half-page-svg" src="./img/start_screen_preview.svg">
-    <button id="activate-tutorial">Bar Chart</button>
-    <a href="./line"><button style="margin-top: 260px">Line Chart</button> </a>
-    <button id="activate-diy-charts">DIY Charts</button>
+    <div id="landing-image-container">
+      <img id="landing-image" class="half-page-svg" src="./img/start_screen_preview.svg">
+    </div>
+
+    <div id="landing-buttons-container">
+      <div id="landing-buttons">
+        <div class="button-item-div">
+          <button><a href="./line" style="text-decoration: none; color: #3481CB">Line Chart</a></button>
+        </div>
+
+        <div class=" button-item-div">
+          <button id="activate-tutorial">Bar Chart</button>
+        </div>
+
+        <div class="button-item-div">
+          <button id="activate-diy-charts">DIY Charts</button>
+        </div>
+      </div>
   </section>
 
   <section id="scan-view" class="view-section offscreen">

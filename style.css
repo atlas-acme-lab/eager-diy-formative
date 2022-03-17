@@ -3,7 +3,6 @@
   --theme-white: #fff;
   --theme-yellow: #FDA333;
   --theme-shadow: rgba(153, 153, 153, 0.4);
-
 }
 
 * {
@@ -27,7 +26,6 @@ body {
   color: var(--theme-yellow);
 }
 
-
 /* NEW VERSION */
 .view-section {
   position: absolute;
@@ -39,13 +37,46 @@ body {
   border-radius: 3px;
   border: 2px solid var(--theme-blue);
   background-color: var(--theme-white);
-  
+}
+
+/**BUTTONS**/
+#landing-image-container {
+  display: inline-block;
+  width: 69%;
+  height: 100%;
+}
+
+#landing-buttons-container {
+  display: inline-block;
+  vertical-align: top;
+  /* background-color: red; */
+  width: 30%;
+  height: 100%;
+}
+
+#landing-buttons {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 16%;
+  position: relative;
+}
+
+.button-item-div {
+  height: 0px;
+}
+
+#landing-image {
+  display: block;
+  margin: auto;
+  z-index: -9999;
 }
 
 #landing-view button, #scan-view button, #chart-view button {
   position: absolute;
   font-family: 'Mali';
-
   background: var(--theme-white);
   border: 8px solid var(--theme-blue);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -53,8 +84,7 @@ body {
 }
 
 #activate-tutorial {
-  top: 10vh;
-
+  /* top: 10vh; */
   /* background: var(--theme-white);
   border: 8px solid var(--theme-blue);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -62,7 +92,7 @@ body {
 }
 
 #activate-diy-charts {
-  top: 150px;
+  /* top: 150px; */
 }
 
 #landing-view button {
@@ -78,7 +108,7 @@ body {
 
 #landing-view .half-page-svg {
   height: 100vh;
-  margin-left:7vw;
+  /* margin-left: 7vw; */
 }
 
 .offscreen {
@@ -104,11 +134,25 @@ body {
   left: calc(50vw - 150px);
 }
 
-#bar-0 { background-color: #EA3942; }
-#bar-1 { background-color: #F3D257; }
-#bar-2 { background-color: #3D8A75; }
-#bar-3 { background-color: #F8AB4F; }
-#bar-4 { background-color: #C2D052; }
+#bar-0 {
+  background-color: #EA3942;
+}
+
+#bar-1 {
+  background-color: #F3D257;
+}
+
+#bar-2 {
+  background-color: #3D8A75;
+}
+
+#bar-3 {
+  background-color: #F8AB4F;
+}
+
+#bar-4 {
+  background-color: #C2D052;
+}
 
 .chart-bar {
   border-radius: 2px;
@@ -163,12 +207,12 @@ body {
   top: 20px;
   padding: 17px;
   border-radius: 20px;
-
   background: var(--theme-white);
   border: 8px solid var(--theme-blue);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
 }
+
 #pause-detection {
   position: absolute;
   right: 20px;
@@ -183,7 +227,6 @@ body {
   left: calc(50vw - 160px);
   width: 320px;
   top: 266px;
-
   background-color: black;
 }
 
@@ -201,7 +244,6 @@ body {
   position: absolute;
   /* top: 0.7vh; */
 }
-
 
 #y-axis-labels {
   display: flex;
@@ -230,7 +272,6 @@ body {
   top: 21px;
   left: 42px;
 }
-
 
 /* SCAN VIEW */
 #scan-view .half-page-svg {
@@ -274,14 +315,12 @@ body {
   transform: scaleX(-1) scaleY(-1);
 }
 
-
 #scanned-chart-icons {
   /* position: absolute;
   left: calc(50vw - 250px);
   bottom: 13px;
   background-color: #000;
   transform: scaleX(-1) scaleY(-1); */
-
   position: absolute;
   left: calc(50vw - 150px);
   top: 290px;

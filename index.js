@@ -11,8 +11,14 @@ let config = {
     maxMarkerPerimeter: 1,
     sizeAfterPerspectiveRemoval: 49,
     area: {
-      start: { x: 0.35, y: 0.16 },
-      end:   { x: 0.98, y: 0.85 },
+      start: {
+        x: 0.35,
+        y: 0.16
+      },
+      end: {
+        x: 0.98,
+        y: 0.85
+      },
     },
   },
   feed_params: {
@@ -40,10 +46,14 @@ let referenceMarkerTop = 17;
 
 const markerMoveThreshold = 1.5;
 // TODO: init these to be y min
-const markerMap = [8,7,0,2,1];
-const markerPositions = [0,0,0,0,0];
-const markerOrigins = [0,0,0,0,0];
+const markerMap = [8, 7, 0, 2, 1];
+const markerPositions = [0, 0, 0, 0, 0];
+const markerOrigins = [0, 0, 0, 0, 0];
 let markerYMax = 0;
+
+let scanTimer = 3000;
+const UPDATE_WINDOW = 1000 / 20;
+let beholderUpdateTimer = UPDATE_WINDOW;
 
 function clamp(min, max, v) {
   if (v < min) return min;
@@ -51,9 +61,7 @@ function clamp(min, max, v) {
   return v;
 }
 
-let scanTimer = 3000;
-const UPDATE_WINDOW = 1000 / 20;
-let beholderUpdateTimer = UPDATE_WINDOW;
+
 function updateController() {
   let currTime = Date.now();
   let dt = currTime - prevTime;
@@ -78,7 +86,7 @@ function updateController() {
         markerPositions[i] = newOffset;
 
         let sliderVal = newOffset / markerRange;
-      
+
         // do marker mapping here
         if (isDIY) setBar(i, Math.round(10 * sliderVal) * 10, 100);
         else setBar(i, Math.round(4 * sliderVal), 4);
@@ -138,7 +146,7 @@ function activateTutorial() {
 function activateDIYChart() {
   document.querySelector('#chart-view').classList.remove('offscreen');
   document.querySelector('#scan-view').classList.add('offscreen');
-  
+
   // show user labels
   document.querySelector('#chart-title').classList.add('hidden');
   document.querySelector('#chart-icons').classList.add('hidden');
@@ -203,10 +211,11 @@ function activateScanningView() {
 }
 
 const maxVH = 180;
+
 function setBar(id, val, max) {
   bars[id].style = `height:${maxVH * val / max}px`;
   bars[id].querySelector('.bar-val').innerHTML = val;
-  
+
   bars[id].classList.remove('hide-num');
   hideNumTimer = 1600;
 }
@@ -255,7 +264,7 @@ window.onload = () => {
 }
 
 /** TODO:
- * 
+ *
  * ! Use proper marker and cam sample area values
- * 
+ *
  */
