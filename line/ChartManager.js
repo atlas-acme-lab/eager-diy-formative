@@ -1,17 +1,35 @@
-
 const markerMoveThreshold = 1;
 // TODO: init these to be y min
-const markerMap = [8,7,0,2,1];
-const markerPositions = [0,0,0,0,0];
-const markerOrigins = [0,0,0,0,0];
+const markerMap = [8, 7, 0, 2, 1];
+const markerPositions = [0, 0, 0, 0, 0];
+const markerOrigins = [0, 0, 0, 0, 0];
 let markerYMax = 0;
 
-let chartRegions = [
-    { value: 0, targetValue: 0.2, fill: '#1555A0' },
-    { value: 0, targetValue: 0.2, fill: '#B3CFF0' },
-    { value: 0, targetValue: 0.2, fill: '#80B2EC' },
-    { value: 0, targetValue: 0.2, fill: '#5D97DB' },
-    { value: 0, targetValue: 0.2, fill: '#4283CE' },
+let chartRegions = [{
+    value: 0,
+    targetValue: 0.2,
+    fill: '#1555A0'
+  },
+  {
+    value: 0,
+    targetValue: 0.2,
+    fill: '#B3CFF0'
+  },
+  {
+    value: 0,
+    targetValue: 0.2,
+    fill: '#80B2EC'
+  },
+  {
+    value: 0,
+    targetValue: 0.2,
+    fill: '#5D97DB'
+  },
+  {
+    value: 0,
+    targetValue: 0.2,
+    fill: '#4283CE'
+  },
 ]
 
 function clamp(min, max, v) {
@@ -23,6 +41,7 @@ function clamp(min, max, v) {
 let scanTimer = 3000;
 const UPDATE_WINDOW = 1000 / 20;
 let beholderUpdateTimer = UPDATE_WINDOW;
+
 function updateController() {
   let currTime = Date.now();
   let dt = currTime - prevTime;
@@ -51,7 +70,7 @@ function updateController() {
       if (Math.abs(newOffset - markerPositions[i]) > markerMoveThreshold) {
         markerPositions[i] = newOffset;
         let sliderVal = newOffset / (markerYMax - markerOrigins[i]);
-      
+
         // do marker mapping here
         chartRegions[i].targetValue = sliderVal;
         // if (isDIY) setBar(i, Math.round(10 * sliderVal) * 10, 100);
@@ -89,51 +108,60 @@ function updateController() {
 }
 
 function lerp(a, b, v) {
-    return a + (b - a) * v;
+  return a + (b - a) * v;
 }
 
 function updateChart(dt) {
-    // render
-    chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+  // render canvas
+  chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+  chartCtx.fillStyle = '#000';
+  chartCtx.strokeStyle = '#000';
+  let lineOffset = chartCanvas.width / 15;
+  // console.log(lineOffset);
 
-    chartCtx.fillStyle = '#000';
-    chartCtx.strokeStyle = '#000';
-    let lineOffset = chartCanvas.width/7;
-    chartRegions.forEach((c) => {
-        chartCtx.save();
-        c.value = lerp(c.value, c.targetValue, 0.05);
+  //creating the dots within the linechart
+  chartRegions.forEach((c) => {
+    chartCtx.save();
+    c.value = lerp(c.value, c.targetValue, 0.5);
+    // console.log(c.value); //0.19999999999977042
 
-        chartCtx.translate(
-          lineOffset,
-          chartCanvas.height - (chartCanvas.height * 6/7 * c.value)
-        );
-
-        chartCtx.beginPath();
-        chartCtx.arc(0, 0, 10, 0, 2 * Math.PI);
-        chartCtx.fill();
-
-        lineOffset += chartCanvas.width/7;
-        chartCtx.restore();
-    });
-
-    lineOffset = chartCanvas.width/7;
-    chartCtx.beginPath();
-    chartCtx.moveTo(
+    chartCtx.translate(
       lineOffset,
-      chartCanvas.height - (chartCanvas.height * 6/7 * chartRegions[0].value)
+      chartCanvas.height - (chartCanvas.height * 0.3333 * c.value)
+      // chartCanvas.height - 18
     );
-    
-    chartCtx.lineWidth = 5;
-    chartRegions.forEach((c) => {
-      c.value = lerp(c.value, c.targetValue, 0.05);
+
+    chartCtx.beginPath();
+    chartCtx.arc(0, 0, 10, 0, 2 * Math.PI); //x, y, radius
+    chartCtx.fill();
+
+    lineOffset += chartCanvas.width / 4.5;
+    chartCtx.restore();
+  });
+
+  lineOffset = chartCanvas.width / 4.5;
+  chartCtx.beginPath();
+
+  // chartCtx.moveTo(0, 50)
+  chartCtx.moveTo(
+    // lineOffset,
+    20,
+    chartCanvas.height - (chartCanvas.height * 0.333 * chartRegions[0].value)
+  );
 
 
-      chartCtx.lineTo(
-        lineOffset,
-        chartCanvas.height - (chartCanvas.height * 6/7 * c.value)
-      );
+  //creating the lines within the line chart
+  chartCtx.lineWidth = 5;
+  chartRegions.forEach((c) => {
+    c.value = lerp(c.value, c.targetValue, 0.05);
 
-      lineOffset += chartCanvas.width/7;
+    // chartCtx.lineTo(400, 0);
+    chartCtx.lineTo(
+      lineOffset,
+      chartCanvas.height - (chartCanvas.height * 0.333 * c.value)
+    );
+
+    lineOffset += chartCanvas.width / 4.5;
   });
 
   chartCtx.stroke();

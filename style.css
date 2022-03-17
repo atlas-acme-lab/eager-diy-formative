@@ -338,6 +338,7 @@ body {
 
 #line-chart {
   position: absolute;
-  left: calc(50vw - 250px);
-  top: calc(50vh - 150px);
+  top: 93px;
+  left: calc(50vw - 206px);
+  /* background-color: red; */
 }
