@@ -1,3 +1,8 @@
+const UPDATE_WINDOW = 1000 / 20;
+let beholderUpdateTimer = UPDATE_WINDOW;
+const referenceMarkerBot = 16;
+const referenceMarkerTop = 17;
+
 function clamp(min, max, v) {
   if (v < min) return min;
   if (v > max) return max;

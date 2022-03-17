@@ -1,3 +1,5 @@
+let scanTimer = 3000;
+
 function activateTutorial() {
   document.querySelector('#chart-view').classList.remove('offscreen');
   document.querySelector('#chart-title').classList.remove('hidden');
@@ -63,7 +65,7 @@ function activateScanningView() {
 function runScan() {
   // console.log();
   isScan = true;
-  scanTimer = 3000;
+  // scanTimer = 3000;
 
   document.querySelector('#scan-tip').innerHTML = "Please wait, your chart is being scanned...";
 

@@ -41,8 +41,7 @@ let runDetection = true;
 let isScan = false;
 let isDIY = false;
 let iconsCanvas, iconsCtx, titleCanvas, titleCtx;
-let referenceMarkerBot = 16;
-let referenceMarkerTop = 17;
+const maxVH = 180;
 
 const markerMoveThreshold = 1.5;
 // TODO: init these to be y min
@@ -50,12 +49,6 @@ const markerMap = [8, 7, 0, 2, 1];
 const markerPositions = [0, 0, 0, 0, 0];
 const markerOrigins = [0, 0, 0, 0, 0];
 let markerYMax = 0;
-
-let scanTimer = 3000;
-const UPDATE_WINDOW = 1000 / 20;
-let beholderUpdateTimer = UPDATE_WINDOW;
-const maxVH = 180;
-
 
 function setBar(id, val, max) {
   bars[id].style = `height:${maxVH * val / max}px`;
