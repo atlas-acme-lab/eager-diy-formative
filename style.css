@@ -315,10 +315,11 @@ body {
 
 #scanned-chart-title {
   position: absolute;
-  left: calc(50vw - 150px);
+  left: calc(50vw - 219px);
   top: 27px;
   background-color: #000;
-  width: 300px;
+  width: 430px;
+  height: 40px;
   transform: scaleX(-1) scaleY(-1);
 }
 
@@ -329,10 +330,12 @@ body {
   background-color: #000;
   transform: scaleX(-1) scaleY(-1); */
   position: absolute;
-  left: calc(50vw - 150px);
-  top: 290px;
+  left: calc(50vw - 219px);
+  top: 360px;
   background-color: #000;
   transform: scaleX(-1) scaleY(-1);
+  width: 430px;
+  height: 40px;
 }
 
 #pie-chart {
