@@ -21,11 +21,11 @@
   <section id="beholder-root" style="position: absolute; top: 20%"></section>
 
   <section id="landing-view" class="view-section">
-    <div id="landing-image-container">
+    <div class="left-side-container">
       <img id="landing-image" class="half-page-svg" src="./img/start_screen_preview.svg">
     </div>
 
-    <div id="landing-buttons-container">
+    <div class="right-side-container">
       <div id="landing-buttons">
         <div class="button-item-div">
           <button><a href="./line" style="text-decoration: none; color: #3481CB">Line Chart</a></button>
@@ -42,13 +42,17 @@
   </section>
 
   <section id="scan-view" class="view-section offscreen">
-    <img id="scan-gif-1" class="half-page-svg" src="./img/scan-1.gif">
-    <img id="scan-gif-2" class="half-page-svg hidden" src="./img/scan-2.gif">
-    <img id="scan-gif-3" class="half-page-svg hidden" src="./img/scan-complete.gif">
+    <div class="left-side-container">
+      <img id="scan-gif-1" class="half-page-svg" src="./img/scan-1.gif">
+      <img id="scan-gif-2" class="half-page-svg hidden" src="./img/scan-2.gif">
+      <img id="scan-gif-3" class="half-page-svg hidden" src="./img/scan-complete.gif">
+    </div>
 
-    <p id="scan-tip">Flip the paper template, place it on the panel, and press SCAN.</p>
-    <button id="activate-scan">SCAN</button>
-    <button id="activate-chart" class="hidden">START</button>
+    <div class="right-side-container">
+      <p id="scan-tip">Flip the paper template, place it on the panel, and press SCAN.</p>
+      <button id="activate-scan">SCAN</button>
+      <button id="activate-chart" class="hidden">START</button>
+    </div>
   </section>
 
   <section id="chart-view" class="view-section offscreen">

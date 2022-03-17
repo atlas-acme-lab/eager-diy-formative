@@ -40,13 +40,13 @@ body {
 }
 
 /**BUTTONS**/
-#landing-image-container {
+.left-side-container {
   display: inline-block;
   width: 69%;
   height: 100%;
 }
 
-#landing-buttons-container {
+.right-side-container {
   display: inline-block;
   vertical-align: top;
   /* background-color: red; */
@@ -278,11 +278,16 @@ body {
 /* SCAN VIEW */
 #scan-view .half-page-svg {
   /* position: absolute; */
-  position: absolute;
+  /* position: absolute; */
   /* bottom: 5px; */
-  left: 60px;
-  width: 276px;
+  /* left: 60px; */
+  /* width: 276px; */
   top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4%;
+  width: 65%;
 }
 
 #activate-scan, #activate-chart {
@@ -290,7 +295,7 @@ body {
   color: var(--theme-blue);
   position: absolute;
   right: 60px;
-  top: 200px;
+  top: 250px;
   padding: 10px 30px;
 }
 
@@ -298,7 +303,7 @@ body {
   font-family: 'Patrick Hand';
   position: absolute;
   width: 270px;
-  font-size: 19px;
+  font-size: 23px;
   right: 20px;
   top: 120px;
 }
