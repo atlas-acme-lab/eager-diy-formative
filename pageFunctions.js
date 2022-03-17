@@ -22,7 +22,52 @@ function activateTutorial() {
   isDIY = false;
 }
 
+
+function resetScanningPage() {
+
+  document.querySelector('#scan-tip').innerHTML = "Flip the paper template, place it on the panel, and press SCAN";
+  document.querySelector('#activate-scan').classList.add('hidden');
+  scanTimer = 3000;
+}
+
+
+//STEP 1 OF THE SCANING PROCESS
+function activateScanningView() {
+  console.log("step1")
+  document.querySelector('#chart-view').classList.add('offscreen');
+  document.querySelector('#scan-view').classList.remove('offscreen');
+
+  document.querySelector('#activate-scan').classList.remove('disabled')
+  document.querySelector('#activate-scan').classList.remove('hidden');
+  document.querySelector('#activate-chart').classList.add('hidden');
+
+  runDetection = true;
+  isScan = false;
+}
+
+
+//STEP 2 OF THE SCANNING PROCESS
+function runScan() {
+  console.log("step2")
+  isScan = true;
+  // scanTimer = 3000;
+
+  document.querySelector('#scan-tip').innerHTML = "Please wait, your chart is being scanned...";
+
+  // this is where the html should be edited
+  document.querySelector('#activate-scan').classList.add('disabled');
+  document.querySelector('#scan-gif-1').classList.add('hidden');
+  document.querySelector('#scan-gif-2').classList.remove('hidden');
+  document.querySelector('#scan-gif-3').classList.add('hidden');
+
+  // THIS IS ALL YOU NEED FOR SCAN
+  iconsCtx.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
+  titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
+}
+
+//STEP 3 OF THE SCANNING PROCESS
 function activateDIYChart() {
+  console.log("step3")
   document.querySelector('#chart-view').classList.remove('offscreen');
   document.querySelector('#scan-view').classList.add('offscreen');
 
@@ -48,36 +93,8 @@ function activateDIYChart() {
 
   runDetection = true;
   isDIY = true;
-}
 
-function activateScanningView() {
-  document.querySelector('#chart-view').classList.add('offscreen');
-  document.querySelector('#scan-view').classList.remove('offscreen');
-
-  document.querySelector('#activate-scan').classList.remove('disabled')
-  document.querySelector('#activate-scan').classList.remove('hidden');
-  document.querySelector('#activate-chart').classList.add('hidden');
-
-  runDetection = true;
-  isScan = false;
-}
-
-function runScan() {
-  // console.log();
-  isScan = true;
-  // scanTimer = 3000;
-
-  document.querySelector('#scan-tip').innerHTML = "Please wait, your chart is being scanned...";
-
-  // this is where the html should be edited
-  document.querySelector('#activate-scan').classList.add('disabled');
-  document.querySelector('#scan-gif-1').classList.add('hidden');
-  document.querySelector('#scan-gif-2').classList.remove('hidden');
-  document.querySelector('#scan-gif-3').classList.add('hidden');
-
-  // THIS IS ALL YOU NEED FOR SCAN
-  iconsCtx.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
-  titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
+  resetScanningPage();
 }
 
 function returnHome() {
