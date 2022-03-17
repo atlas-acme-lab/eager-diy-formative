@@ -122,6 +122,7 @@ function updateChart(dt) {
       lineOffset,
       chartCanvas.height - (chartCanvas.height * 6/7 * chartRegions[0].value)
     );
+    
     chartCtx.lineWidth = 5;
     chartRegions.forEach((c) => {
       c.value = lerp(c.value, c.targetValue, 0.05);

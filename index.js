@@ -35,6 +35,8 @@ let runDetection = true;
 let isScan = false;
 let isDIY = false;
 let iconsCanvas, iconsCtx, titleCanvas, titleCtx;
+let referenceMarkerBot = 16;
+let referenceMarkerTop = 17;
 
 const markerMoveThreshold = 1.5;
 // TODO: init these to be y min
@@ -65,30 +67,21 @@ function updateController() {
     }
     // console.log(Beholder.getMarker(5).center.y - markerOrigins[4]);
 
+    let topRef = Beholder.getMarker(referenceMarkerTop).center.y;
+    let botRef = Beholder.getMarker(referenceMarkerBot).center.y;
+    let markerRange = topRef - botRef;
     for (let i = 0; i < 5; i++) {
       let currMarker = Beholder.getMarker(markerMap[i]);
-      // capture origin
-      if (markerOrigins[i] === 0 && currMarker.center.i != 0 && i != 2) {
-        markerOrigins[i] = currMarker.center.y;
-      }
 
-      if (i === 2 && markerYMax === 0 && currMarker.center.y !== 0) {
-        markerYMax = currMarker.center.y;
-      }
-
-      let newOffset = currMarker.center.y - markerOrigins[i];
+      let newOffset = currMarker.center.y - botRef;
       if (Math.abs(newOffset - markerPositions[i]) > markerMoveThreshold) {
         markerPositions[i] = newOffset;
-        let sliderVal = newOffset / (markerYMax - markerOrigins[i]);
+
+        let sliderVal = newOffset / markerRange;
       
         // do marker mapping here
         if (isDIY) setBar(i, Math.round(10 * sliderVal) * 10, 100);
         else setBar(i, Math.round(4 * sliderVal), 4);
-      }
-
-      // center slider should be at top to calibrate
-      if (markerOrigins[2] == 0 && markerOrigins[1] != 0 && markerOrigins[3] != 0) {
-        markerOrigins[2] = (markerOrigins[1] + markerOrigins[3]) / 2;
       }
     }
   }
@@ -197,7 +190,7 @@ function returnHome() {
   isDIY = false;
 }
 
-function activateDIY() {
+function activateScanningView() {
   document.querySelector('#chart-view').classList.add('offscreen');
   document.querySelector('#scan-view').classList.remove('offscreen');
 
@@ -250,7 +243,7 @@ window.onload = () => {
   // this toggle's it for now, no feedback tho
   document.querySelector('#pause-detection').addEventListener('click', () => (runDetection = !runDetection))
   document.querySelector('#return-home').addEventListener('click', returnHome);
-  document.querySelector('#activate-diy-charts').addEventListener('click', activateDIY);
+  document.querySelector('#activate-diy-charts').addEventListener('click', activateScanningView);
   document.querySelector('#activate-scan').addEventListener('click', runScan);
   document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
 
