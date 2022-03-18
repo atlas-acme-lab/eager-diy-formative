@@ -140,7 +140,7 @@ function lineUpdateController(dt) {
     // console.log(newOffset, markerRange)
 
     // do marker mapping here
-    // chartRegions[i].targetValue = sliderVal;
+    chartRegions[i].targetValue = sliderVal;
   }
   lineUpdateChart(dt);
 }

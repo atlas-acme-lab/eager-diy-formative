@@ -6,8 +6,8 @@ function activateTutorial() {
   document.querySelector('#chart-icons').classList.remove('hidden');
 
   // hide user labels
-  document.querySelector('#scanned-chart-title').classList.add('hidden');
-  document.querySelector('#scanned-chart-icons').classList.add('hidden');
+  document.querySelector('.scanned-chart-title').classList.add('hidden');
+  document.querySelector('.scanned-chart-icons').classList.add('hidden');
 
   document.querySelector('#y-axis-labels').innerHTML = `
     <span>4</span>

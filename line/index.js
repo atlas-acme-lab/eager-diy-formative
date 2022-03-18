@@ -60,8 +60,8 @@ function activateTutorial() {
   // document.querySelector('#chart-icons').classList.remove('hidden');
 
   // hide user labels
-  // document.querySelector('#scanned-chart-title').classList.add('hidden');
-  // document.querySelector('#scanned-chart-icons').classList.add('hidden');
+  document.querySelector('#scanned-chart-title').classList.add('hidden');
+  document.querySelector('#scanned-chart-icons').classList.add('hidden');
 
   runDetection = true;
   isScan = false;
@@ -73,11 +73,11 @@ function activateDIYChart() {
   document.querySelector('#scan-view').classList.add('offscreen');
 
   // show user labels
-  // document.querySelector('#chart-title').classList.add('hidden');
-  // document.querySelector('#chart-icons').classList.add('hidden');
+  document.querySelector('#chart-title').classList.add('hidden');
+  document.querySelector('#chart-icons').classList.add('hidden');
 
-  // document.querySelector('#scanned-chart-title').classList.remove('hidden');
-  // document.querySelector('#scanned-chart-icons').classList.remove('hidden');
+  document.querySelector('#scanned-chart-title').classList.remove('hidden');
+  document.querySelector('#scanned-chart-icons').classList.remove('hidden');
 
   document.querySelector('#scan-gif-1').classList.remove('hidden');
   document.querySelector('#scan-gif-2').classList.add('hidden');
