@@ -93,10 +93,10 @@ function runScan() {
   document.querySelector('#scan-tip').innerHTML = "Please wait, your chart is being scanned...";
 
   // this is where the html should be edited
-  //   document.querySelector('#activate-scan').classList.add('disabled');
-  //   document.querySelector('#scan-gif-1').classList.add('hidden');
-  //   document.querySelector('#scan-gif-2').classList.remove('hidden');
-  //   document.querySelector('#scan-gif-3').classList.add('hidden');
+  document.querySelector('#activate-scan').classList.add('disabled');
+  document.querySelector('#scan-gif-1').classList.add('hidden');
+  document.querySelector('#scan-gif-2').classList.remove('hidden');
+  document.querySelector('#scan-gif-3').classList.add('hidden');
 }
 
 function returnHome() {
