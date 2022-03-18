@@ -2,17 +2,17 @@ const UPDATE_WINDOW = 1000 / 20;
 let beholderUpdateTimer = UPDATE_WINDOW;
 let hideNumTimer = false;
 let barChartActivated = false;
-let lineChartActivated = true;
+let lineChartActivated = false;
 
 const referenceMarkerBot = 16;
 const referenceMarkerTop = 17;
-const lineMarkerMap = [8, 7, 0, 2, 1];
-const maxVH = 180;
+const lineMarkerMap = [0, 1, 2, 3, 4];
+const maxVH = 258;
 
 const markerMoveThreshold = 1.5;
 // TODO: init these to be y min
 //Sandra's comment: idk why they are here
-const markerMap = [8, 7, 0, 2, 1];
+const markerMap = [0, 1, 2, 3, 4];
 const markerPositions = [0, 0, 0, 0, 0];
 const markerOrigins = [0, 0, 0, 0, 0];
 let markerYMax = 0;
@@ -20,7 +20,7 @@ let markerYMax = 0;
 let chartCanvas;
 let chartCtx;
 
-
+// console.log("top of beholder");
 
 let chartRegions = [{
     value: 0,
@@ -71,6 +71,7 @@ function lerp(a, b, v) {
 
 
 function updateController() {
+  // console.log("updateController");
   let currTime = Date.now();
   let dt = currTime - prevTime;
   prevTime = currTime;
@@ -87,11 +88,13 @@ function updateController() {
     } else {
       let topRef = Beholder.getMarker(referenceMarkerTop).center.y;
       let botRef = Beholder.getMarker(referenceMarkerBot).center.y;
+      // console.log(topRef, botRef);
       let markerRange = topRef - botRef;
       for (let i = 0; i < 5; i++) {
         let currMarker = Beholder.getMarker(markerMap[i]);
 
         let newOffset = currMarker.center.y - botRef;
+        // console.log(newOffset);
         if (Math.abs(newOffset - markerPositions[i]) > markerMoveThreshold) {
           markerPositions[i] = newOffset;
 
@@ -148,63 +151,75 @@ function lineUpdateController(dt) {
 function lineUpdateChart(dt) {
   // render canvas
   // console.log("hello");
+  // console.log("hello");
   chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
   chartCtx.fillStyle = '#000';
   chartCtx.strokeStyle = '#000';
-  let lineOffset = chartCanvas.width / 15;
+  let lineOffset = chartCanvas.width / 18; //controls the horizontal movement
   // console.log(lineOffset);
 
   //creating the dots within the linechart
   chartRegions.forEach((c) => {
     // console.log(c);
     chartCtx.save();
-    c.value = lerp(c.value, c.targetValue, 0.5);
+    c.value = c.targetValue;
+    // c.value = lerp(c.value, c.targetValue, 0.5);
     // console.log(c.value); //0.19999999999977042
+    let pointHeight = (0.94 - c.value) * chartCanvas.height;
+    // console.log(c.value);
 
     chartCtx.translate(
       lineOffset,
-      chartCanvas.height - (chartCanvas.height * 0.3333 * c.value)
-      // chartCanvas.height - 18
+      // chartCanvas.height - (chartCanvas.height * 6 / 7 * c.value)
+      // (pointHeight > x) ? maxValue : pointHeight;
+
+      clamp(-0.5, 0.94 * chartCanvas.height, pointHeight)
+
     );
 
     chartCtx.beginPath();
     chartCtx.arc(0, 0, 10, 0, 2 * Math.PI); //x, y, radius
     chartCtx.fill();
 
-    lineOffset += chartCanvas.width / 4.5;
+    lineOffset += chartCanvas.width / (9 / 2);
     chartCtx.restore();
   });
 
-  lineOffset = chartCanvas.width / 4.5;
+  lineOffset = chartCanvas.width / 18;
   chartCtx.beginPath();
 
   // chartCtx.moveTo(0, 50)
-  chartCtx.moveTo(
-    // lineOffset,
-    20,
-    chartCanvas.height - (chartCanvas.height * 0.333 * chartRegions[0].value)
-  );
+  // chartCtx.moveTo(
+  //   lineOffset,
+  //   // 20,
+  //   chartCanvas.height - (chartCanvas.height * 6 / 7 * chartRegions[0].value)
+  // );
 
 
   //creating the lines within the line chart
   chartCtx.lineWidth = 5;
   chartRegions.forEach((c) => {
-    c.value = lerp(c.value, c.targetValue, 0.05);
+    c.value = c.targetValue;
+    // c.value = lerp(c.value, c.targetValue, 0.5);
 
     // chartCtx.lineTo(400, 0);
     chartCtx.lineTo(
       lineOffset,
-      chartCanvas.height - (chartCanvas.height * 0.333 * c.value)
+      (0.94 - c.value) * chartCanvas.height
+      // chartCanvas.height - (chartCanvas.height * 6 / 7 * c.value)
     );
 
-    lineOffset += chartCanvas.width / 4.5;
+    lineOffset += chartCanvas.width / (9 / 2);
   });
 
   chartCtx.stroke();
+
 }
 
 
 function initController() {
+  // console.log("nside initi");
   Beholder.init('#beholder-root', config);
   updateController();
+  // console.log("after iniit");
 }

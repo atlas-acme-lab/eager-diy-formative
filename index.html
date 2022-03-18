@@ -65,7 +65,7 @@
     <button id="pause-detection" class="pause-detection"><img src="./img/pause.svg"></button>
 
     <h1 id="chart-title">Quantity of Fruits</h1>
-    <canvas class="scanned-chart-title hidden" width="400" height="40"></canvas>
+    <canvas id="scanned-chart-title" class="hidden" width="400" height="40"></canvas>
 
     <div id="chart-bars">
       <div id="bar-0" class="chart-bar"><span class="bar-val">0</span></div>
@@ -94,19 +94,19 @@
       <img class="fruit-icon" src="./img/fruit/orange.svg" alt="Large Red apple vector drawing">
       <img class="fruit-icon" src="./img/fruit/green-lemon.svg" alt="Large Red apple vector drawing">
     </div>
-    <canvas class="scanned-chart-icons hidden" width="400" height="40"></canvas>
+    <canvas id="scanned-chart-icons" class="hidden" width="400" height="40"></canvas>
   </section>
 
   <section id="line-chart-view" class="view-section offscreen">
     <button id="return-line" class="return-home"><img src="./img/DIY.svg"></button>
     <button id="pause-line" class="pause-detection"><img src="./img/pause.svg"></button>
 
-    <canvas class="scanned-chart-title" class="hidden" width="400" height="40"></canvas>
+    <canvas id="title-line" class="hidden" width="400" height="40"></canvas>
 
     <!-- class="hidden" -->
 
     <!-- width="406" height="270" -->
-    <canvas id="line-chart" width="406" height="270"></canvas>
+    <canvas id="line-chart" width="406" height="275"></canvas>
 
     <div id="y-axis">
       <div id="y-axis-labels">
@@ -120,7 +120,7 @@
     </div>
     <div id="x-axis"></div>
 
-    <canvas class="scanned-chart-icons" class="hidden" width="400" height="40"></canvas>
+    <canvas id="icon-line" class="hidden" width="400" height="40"></canvas>
   </section>
 
 </body>

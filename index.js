@@ -40,6 +40,7 @@ let runDetection = true;
 let isScan = false;
 let isDIY = false;
 let iconsCanvas, iconsCtx, titleCanvas, titleCtx;
+let iconsCanvasLine, iconsCtxLine, titleCanvasLine, titleCtxLine;
 
 window.onload = () => {
   document.addEventListener('keydown', (e) => {
@@ -70,6 +71,7 @@ window.onload = () => {
 
   chartCanvas = document.querySelector('#line-chart');
   chartCtx = chartCanvas.getContext('2d');
+  console.log("before init");
   initController();
   document.querySelector('#activate-tutorial').addEventListener('click', activateTutorial);
   // this toggle's it for now, no feedback tho
@@ -82,11 +84,21 @@ window.onload = () => {
   document.querySelector('#activate-scan').addEventListener('click', runScan);
   document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
 
-  iconsCanvas = document.querySelector('.scanned-chart-icons');
+  //////
+
+  iconsCanvasLine = document.querySelector('#icon-line');
+  iconsCtxLine = iconsCanvasLine.getContext('2d');
+
+  titleCanvasLine = document.querySelector('#title-line');
+  titleCtxLine = titleCanvasLine.getContext('2d');
+
+
+  iconsCanvas = document.querySelector('#scanned-chart-icons');
   iconsCtx = iconsCanvas.getContext('2d');
 
-  titleCanvas = document.querySelector('.scanned-chart-title');
+  titleCanvas = document.querySelector('#scanned-chart-title');
   titleCtx = titleCanvas.getContext('2d');
+
 }
 
 /** TODO:

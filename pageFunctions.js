@@ -58,9 +58,23 @@ function runScan() {
   document.querySelector('#scan-gif-2').classList.remove('hidden');
   document.querySelector('#scan-gif-3').classList.add('hidden');
 
-  // THIS IS ALL YOU NEED FOR SCAN
-  iconsCtx.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
-  titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
+
+  if (barChartActivated) {
+    iconsCtx.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
+    titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
+  } else {
+    console.log(iconsCtxLine, titleCtxLine);
+    iconsCtxLine.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
+    titleCtxLine.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
+  }
+
+  // // THIS IS ALL YOU NEED FOR SCAN
+  // iconsCtx.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
+  // titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
+  //
+  // console.log(iconsCtxLine, titleCtxLine);
+  // iconsCtxLine.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
+  // titleCtxLine.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
 }
 
 //STEP 3 OF THE SCANNING PROCESS
@@ -96,8 +110,8 @@ function activateDIYBarChart() {
   document.querySelector('#chart-title').classList.add('hidden');
   document.querySelector('#chart-icons').classList.add('hidden');
 
-  document.querySelector('.scanned-chart-title').classList.remove('hidden');
-  document.querySelector('.scanned-chart-icons').classList.remove('hidden');
+  document.querySelector('#scanned-chart-title').classList.remove('hidden');
+  document.querySelector('#scanned-chart-icons').classList.remove('hidden');
 
   document.querySelector('#scan-gif-1').classList.remove('hidden');
   document.querySelector('#scan-gif-2').classList.add('hidden');
@@ -110,11 +124,8 @@ function acitvateDIYLineChart() {
   document.querySelector('#scan-view').classList.add('offscreen');
 
   // show user labels
-  // document.querySelector('#chart-title').classList.add('hidden');
-  // document.querySelector('#chart-icons').classList.add('hidden');
-
-  document.querySelector('.scanned-chart-title').classList.remove('hidden');
-  document.querySelector('.scanned-chart-icons').classList.remove('hidden');
+  document.querySelector('#title-line').classList.remove('hidden');
+  document.querySelector('#icon-line').classList.remove('hidden');
 
   document.querySelector('#scan-gif-1').classList.remove('hidden');
   document.querySelector('#scan-gif-2').classList.add('hidden');
