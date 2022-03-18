@@ -40,15 +40,6 @@ let runDetection = true;
 let isScan = false;
 let isDIY = false;
 let iconsCanvas, iconsCtx, titleCanvas, titleCtx;
-const maxVH = 180;
-
-const markerMoveThreshold = 1.5;
-// TODO: init these to be y min
-//Sandra's comment: idk why they are here
-const markerMap = [8, 7, 0, 2, 1];
-const markerPositions = [0, 0, 0, 0, 0];
-const markerOrigins = [0, 0, 0, 0, 0];
-let markerYMax = 0;
 
 window.onload = () => {
   document.addEventListener('keydown', (e) => {
@@ -77,19 +68,24 @@ window.onload = () => {
     hideNumTimer = 1600;
   }))
 
+  chartCanvas = document.querySelector('#line-chart');
+  chartCtx = chartCanvas.getContext('2d');
   initController();
   document.querySelector('#activate-tutorial').addEventListener('click', activateTutorial);
   // this toggle's it for now, no feedback tho
   document.querySelector('#pause-detection').addEventListener('click', () => (runDetection = !runDetection))
   document.querySelector('#return-home').addEventListener('click', returnHome);
-  document.querySelector('#activate-diy-charts').addEventListener('click', activateScanningView);
+  document.querySelector('#pause-line').addEventListener('click', () => (runDetection = !runDetection))
+  document.querySelector('#return-line').addEventListener('click', returnHome);
+  document.querySelector('#activate-diy-bar').addEventListener('click', () => activateScanningView("bar"));
+  document.querySelector('#activate-diy-line').addEventListener('click', () => activateScanningView("line"));
   document.querySelector('#activate-scan').addEventListener('click', runScan);
   document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
 
-  iconsCanvas = document.querySelector('#scanned-chart-icons');
+  iconsCanvas = document.querySelector('.scanned-chart-icons');
   iconsCtx = iconsCanvas.getContext('2d');
 
-  titleCanvas = document.querySelector('#scanned-chart-title');
+  titleCanvas = document.querySelector('.scanned-chart-title');
   titleCtx = titleCanvas.getContext('2d');
 }
 

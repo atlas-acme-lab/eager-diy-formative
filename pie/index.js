@@ -47,7 +47,7 @@ function initController() {
 }
 
 function activateTutorial() {
-  document.querySelector('#chart-view').classList.remove('offscreen');
+  document.querySelector('#bar-chart-view').classList.remove('offscreen');
   document.querySelector('#chart-title').classList.remove('hidden');
   document.querySelector('#chart-icons').classList.remove('hidden');
 
@@ -61,7 +61,7 @@ function activateTutorial() {
 }
 
 function activateDIYChart() {
-  document.querySelector('#chart-view').classList.remove('offscreen');
+  document.querySelector('#bar-chart-view').classList.remove('offscreen');
   document.querySelector('#scan-view').classList.add('offscreen');
   
   // show user labels
@@ -94,7 +94,7 @@ function runScan() {
 }
 
 function returnHome() {
-  document.querySelector('#chart-view').classList.add('offscreen');
+  document.querySelector('#bar-chart-view').classList.add('offscreen');
   document.querySelector('#scan-view').classList.add('offscreen');
 
   runDetection = true;
@@ -103,7 +103,7 @@ function returnHome() {
 }
 
 function activateDIY() {
-  document.querySelector('#chart-view').classList.add('offscreen');
+  document.querySelector('#bar-chart-view').classList.add('offscreen');
   document.querySelector('#scan-view').classList.remove('offscreen');
 
   document.querySelector('#activate-scan').classList.remove('disabled')
@@ -140,7 +140,7 @@ window.onload = () => {
   // this toggle's it for now, no feedback tho
   document.querySelector('#pause-detection').addEventListener('click', () => (runDetection = !runDetection))
   document.querySelector('#return-home').addEventListener('click', returnHome);
-  document.querySelector('#activate-diy-charts').addEventListener('click', activateDIY);
+  document.querySelector('#activate-diy-bar').addEventListener('click', activateDIY);
   document.querySelector('#activate-scan').addEventListener('click', runScan);
   document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
 

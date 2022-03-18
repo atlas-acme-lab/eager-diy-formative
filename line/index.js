@@ -11,8 +11,14 @@ let config = {
     maxMarkerPerimeter: 1,
     sizeAfterPerspectiveRemoval: 49,
     area: {
-      start: { x: 0.35, y: 0.16 },
-      end:   { x: 0.98, y: 0.85 },
+      start: {
+        x: 0.35,
+        y: 0.16
+      },
+      end: {
+        x: 0.98,
+        y: 0.85
+      },
     },
   },
   feed_params: {
@@ -41,9 +47,11 @@ let isDIY = false;
 let iconsCanvas, iconsCtx, titleCanvas, titleCtx;
 
 function initController() {
+  // console.log("initi");
   Beholder.init('#beholder-root', config);
-
+  // console.log("before");
   updateController();
+  // console.log("after");
 }
 
 function activateTutorial() {
@@ -63,7 +71,7 @@ function activateTutorial() {
 function activateDIYChart() {
   document.querySelector('#chart-view').classList.remove('offscreen');
   document.querySelector('#scan-view').classList.add('offscreen');
-  
+
   // show user labels
   // document.querySelector('#chart-title').classList.add('hidden');
   // document.querySelector('#chart-icons').classList.add('hidden');
@@ -133,16 +141,18 @@ window.onload = () => {
     b.classList.remove('hide-num');
     hideNumTimer = 1600;
   }))
+
   chartCanvas = document.querySelector('#line-chart');
   chartCtx = chartCanvas.getContext('2d');
   initController();
-  document.querySelector('#activate-tutorial').addEventListener('click', activateTutorial);
-  // this toggle's it for now, no feedback tho
-  document.querySelector('#pause-detection').addEventListener('click', () => (runDetection = !runDetection))
-  document.querySelector('#return-home').addEventListener('click', returnHome);
-  document.querySelector('#activate-diy-charts').addEventListener('click', activateDIY);
-  document.querySelector('#activate-scan').addEventListener('click', runScan);
-  document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
 
-  
+  // document.querySelector('#activate-tutorial').addEventListener('click', activateTutorial);
+  // // this toggle's it for now, no feedback tho
+  // document.querySelector('#pause-detection').addEventListener('click', () => (runDetection = !runDetection))
+  // document.querySelector('#return-home').addEventListener('click', returnHome);
+  // document.querySelector('#activate-diy-charts').addEventListener('click', activateDIY);
+  // document.querySelector('#activate-scan').addEventListener('click', runScan);
+  // document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
+
+
 }

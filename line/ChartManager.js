@@ -30,7 +30,7 @@ let chartRegions = [{
     targetValue: 0.2,
     fill: '#4283CE'
   },
-]
+];
 
 function clamp(min, max, v) {
   if (v < min) return min;
@@ -57,14 +57,7 @@ function updateController() {
 
     for (let i = 0; i < 5; i++) {
       let currMarker = Beholder.getMarker(markerMap[i]);
-      // capture origin
-      if (markerOrigins[i] === 0 && currMarker.center.i != 0 && i != 2) {
-        markerOrigins[i] = currMarker.center.y;
-      }
 
-      if (i === 2 && markerYMax === 0 && currMarker.center.y !== 0) {
-        markerYMax = currMarker.center.y;
-      }
 
       let newOffset = currMarker.center.y - markerOrigins[i];
       if (Math.abs(newOffset - markerPositions[i]) > markerMoveThreshold) {
@@ -113,6 +106,7 @@ function lerp(a, b, v) {
 
 function updateChart(dt) {
   // render canvas
+  // console.log("hello");
   chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
   chartCtx.fillStyle = '#000';
   chartCtx.strokeStyle = '#000';
@@ -121,6 +115,7 @@ function updateChart(dt) {
 
   //creating the dots within the linechart
   chartRegions.forEach((c) => {
+    // console.log(c);
     chartCtx.save();
     c.value = lerp(c.value, c.targetValue, 0.5);
     // console.log(c.value); //0.19999999999977042

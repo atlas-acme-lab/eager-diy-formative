@@ -1,7 +1,7 @@
 let scanTimer = 3000;
 
 function activateTutorial() {
-  document.querySelector('#chart-view').classList.remove('offscreen');
+  document.querySelector('#bar-chart-view').classList.remove('offscreen');
   document.querySelector('#chart-title').classList.remove('hidden');
   document.querySelector('#chart-icons').classList.remove('hidden');
 
@@ -24,7 +24,6 @@ function activateTutorial() {
 
 
 function resetScanningPage() {
-
   document.querySelector('#scan-tip').innerHTML = "Flip the paper template, place it on the panel, and press SCAN";
   document.querySelector('#activate-scan').classList.add('hidden');
   scanTimer = 3000;
@@ -32,9 +31,10 @@ function resetScanningPage() {
 
 
 //STEP 1 OF THE SCANING PROCESS
-function activateScanningView() {
-  console.log("step1")
-  document.querySelector('#chart-view').classList.add('offscreen');
+function activateScanningView(chartType) {
+  if (chartType == "bar") barChartActivated = true;
+  if (chartType == "line") lineChartActivated = true;
+  document.querySelector('#bar-chart-view').classList.add('offscreen');
   document.querySelector('#scan-view').classList.remove('offscreen');
 
   document.querySelector('#activate-scan').classList.remove('disabled')
@@ -48,9 +48,7 @@ function activateScanningView() {
 
 //STEP 2 OF THE SCANNING PROCESS
 function runScan() {
-  console.log("step2")
   isScan = true;
-  // scanTimer = 3000;
 
   document.querySelector('#scan-tip').innerHTML = "Please wait, your chart is being scanned...";
 
@@ -67,20 +65,12 @@ function runScan() {
 
 //STEP 3 OF THE SCANNING PROCESS
 function activateDIYChart() {
-  console.log("step3")
-  document.querySelector('#chart-view').classList.remove('offscreen');
-  document.querySelector('#scan-view').classList.add('offscreen');
-
-  // show user labels
-  document.querySelector('#chart-title').classList.add('hidden');
-  document.querySelector('#chart-icons').classList.add('hidden');
-
-  document.querySelector('#scanned-chart-title').classList.remove('hidden');
-  document.querySelector('#scanned-chart-icons').classList.remove('hidden');
-
-  document.querySelector('#scan-gif-1').classList.remove('hidden');
-  document.querySelector('#scan-gif-2').classList.add('hidden');
-  document.querySelector('#scan-gif-3').classList.add('hidden');
+  // console.log("step3")
+  if (barChartActivated) {
+    activateDIYBarChart();
+  } else {
+    acitvateDIYLineChart();
+  }
 
   // set the scale
   document.querySelector('#y-axis-labels').innerHTML = `
@@ -97,8 +87,47 @@ function activateDIYChart() {
   resetScanningPage();
 }
 
+
+function activateDIYBarChart() {
+  document.querySelector('#bar-chart-view').classList.remove('offscreen');
+  document.querySelector('#scan-view').classList.add('offscreen');
+
+  // show user labels
+  document.querySelector('#chart-title').classList.add('hidden');
+  document.querySelector('#chart-icons').classList.add('hidden');
+
+  document.querySelector('.scanned-chart-title').classList.remove('hidden');
+  document.querySelector('.scanned-chart-icons').classList.remove('hidden');
+
+  document.querySelector('#scan-gif-1').classList.remove('hidden');
+  document.querySelector('#scan-gif-2').classList.add('hidden');
+  document.querySelector('#scan-gif-3').classList.add('hidden');
+}
+
+function acitvateDIYLineChart() {
+  document.querySelector('#line-chart-view').classList.remove('offscreen');
+  // document.querySelector('#line-chart-view').classList.remove('hidden');
+  document.querySelector('#scan-view').classList.add('offscreen');
+
+  // show user labels
+  // document.querySelector('#chart-title').classList.add('hidden');
+  // document.querySelector('#chart-icons').classList.add('hidden');
+
+  document.querySelector('.scanned-chart-title').classList.remove('hidden');
+  document.querySelector('.scanned-chart-icons').classList.remove('hidden');
+
+  document.querySelector('#scan-gif-1').classList.remove('hidden');
+  document.querySelector('#scan-gif-2').classList.add('hidden');
+  document.querySelector('#scan-gif-3').classList.add('hidden');
+
+}
+
 function returnHome() {
-  document.querySelector('#chart-view').classList.add('offscreen');
+  console.log("enter");
+  barChartActivated = false;
+  lineChartActivated = false;
+  document.querySelector('#line-chart-view').classList.add('offscreen');
+  document.querySelector('#bar-chart-view').classList.add('offscreen');
   document.querySelector('#scan-view').classList.add('offscreen');
 
   runDetection = true;

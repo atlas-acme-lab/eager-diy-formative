@@ -42,7 +42,7 @@ body {
 /**BUTTONS**/
 .left-side-container {
   display: inline-block;
-  width: 69%;
+  width: 65%;
   height: 100%;
 }
 
@@ -56,11 +56,11 @@ body {
 
 #landing-buttons {
   width: 100%;
-  height: 50%;
+  height: 68%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  top: 16%;
+  top: 8%;
   position: relative;
 }
 
@@ -74,7 +74,7 @@ body {
   z-index: -9999;
 }
 
-#landing-view button, #scan-view button, #chart-view button {
+#landing-view button, #scan-view button, #bar-chart-view button, #line-chart-view button {
   position: absolute;
   font-family: 'Mali';
   background: var(--theme-white);
@@ -91,7 +91,7 @@ body {
   border-radius: 12px; */
 }
 
-#activate-diy-charts {
+#activate-diy-bar {
   /* top: 150px; */
 }
 
@@ -103,7 +103,7 @@ body {
   color: var(--theme-blue);
   font-size: 30px;
   padding: 15px;
-  width: 221px;
+  width: 290px;
 }
 
 #landing-view .half-page-svg {
@@ -203,7 +203,7 @@ body {
   padding: 9px;
 }
 
-#return-home {
+.return-home {
   position: absolute;
   left: 20px;
   top: 20px;
@@ -215,7 +215,7 @@ body {
   border-radius: 12px;
 }
 
-#pause-detection {
+.pause-detection {
   position: absolute;
   right: 20px;
   top: 20px;
@@ -313,7 +313,7 @@ body {
   border: 8px solid var(--theme-shadow);
 }
 
-#scanned-chart-title {
+.scanned-chart-title {
   position: absolute;
   left: calc(50vw - 219px);
   top: 27px;
@@ -323,7 +323,7 @@ body {
   transform: scaleX(-1) scaleY(-1);
 }
 
-#scanned-chart-icons {
+.scanned-chart-icons {
   /* position: absolute;
   left: calc(50vw - 250px);
   bottom: 13px;
@@ -348,5 +348,5 @@ body {
   position: absolute;
   top: 93px;
   left: calc(50vw - 206px);
-  /* background-color: red; */
+  background-color: red;
 }
