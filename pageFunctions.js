@@ -1,4 +1,4 @@
-let scanTimer = 100;
+let scanTimer = 3000;
 
 // const colors = ["#EA3942", "#F3D257", "#3D8A75", "#F8AB4F", "#C2D052", "#FD8322", "#FECA0A", "#9AC806", "#6958CE", "#FB0088"]; //orange, yellow, green, purple, pink;
 const colors = ["#FD8322", "#FECA0A", "#9AC806", "#6958CE", "#FB0088"]; //orange, yellow, green, purple, pink;
@@ -68,7 +68,7 @@ function activateTutorial() {
 function resetScanningPage() {
   document.querySelector('#scan-tip').innerHTML = "Flip the paper template, place it on the panel, and press SCAN";
   document.querySelector('#activate-scan').classList.add('hidden');
-  scanTimer = 100;
+  scanTimer = 3000;
 }
 
 

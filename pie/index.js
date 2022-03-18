@@ -11,8 +11,14 @@ let config = {
     maxMarkerPerimeter: 1,
     sizeAfterPerspectiveRemoval: 49,
     area: {
-      start: { x: 0.35, y: 0.16 },
-      end:   { x: 0.98, y: 0.85 },
+      start: {
+        x: 0.35,
+        y: 0.16
+      },
+      end: {
+        x: 0.98,
+        y: 0.85
+      },
     },
   },
   feed_params: {
@@ -63,7 +69,7 @@ function activateTutorial() {
 function activateDIYChart() {
   document.querySelector('#bar-chart-view').classList.remove('offscreen');
   document.querySelector('#scan-view').classList.add('offscreen');
-  
+
   // show user labels
   document.querySelector('#chart-title').classList.add('hidden');
   document.querySelector('#chart-icons').classList.add('hidden');
@@ -87,10 +93,10 @@ function runScan() {
   document.querySelector('#scan-tip').innerHTML = "Please wait, your chart is being scanned...";
 
   // this is where the html should be edited
-  document.querySelector('#activate-scan').classList.add('disabled');
-  document.querySelector('#scan-gif-1').classList.add('hidden');
-  document.querySelector('#scan-gif-2').classList.remove('hidden');
-  document.querySelector('#scan-gif-3').classList.add('hidden');
+  //   document.querySelector('#activate-scan').classList.add('disabled');
+  //   document.querySelector('#scan-gif-1').classList.add('hidden');
+  //   document.querySelector('#scan-gif-2').classList.remove('hidden');
+  //   document.querySelector('#scan-gif-3').classList.add('hidden');
 }
 
 function returnHome() {
@@ -136,13 +142,13 @@ window.onload = () => {
   chartCanvas = document.querySelector('#pie-chart');
   chartCtx = chartCanvas.getContext('2d');
   initController();
-  document.querySelector('#activate-tutorial').addEventListener('click', activateTutorial);
+  // document.querySelector('#activate-tutorial').addEventListener('click', activateTutorial);
   // this toggle's it for now, no feedback tho
-  document.querySelector('#pause-detection').addEventListener('click', () => (runDetection = !runDetection))
-  document.querySelector('#return-home').addEventListener('click', returnHome);
-  document.querySelector('#activate-diy-bar').addEventListener('click', activateDIY);
-  document.querySelector('#activate-scan').addEventListener('click', runScan);
-  document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
+  // document.querySelector('#pause-detection').addEventListener('click', () => (runDetection = !runDetection))
+  // document.querySelector('#return-home').addEventListener('click', returnHome);
+  // document.querySelector('#activate-diy-bar').addEventListener('click', activateDIY);
+  // document.querySelector('#activate-scan').addEventListener('click', runScan);
+  // document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
 
-  
+
 }

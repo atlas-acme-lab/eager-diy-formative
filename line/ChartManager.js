@@ -1,6 +1,6 @@
 const markerMoveThreshold = 1;
 // TODO: init these to be y min
-const lineMarkerMap = [0, 1, 3, 7, 4];
+const lineMarkerMap = [0, 1, 2, 3, 4];
 const markerPositions = [0, 0, 0, 0, 0];
 const markerOrigins = [0, 0, 0, 0, 0];
 let markerYMax = 0;
