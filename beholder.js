@@ -165,7 +165,7 @@ function lineUpdateChart(dt) {
     c.value = c.targetValue;
     // c.value = lerp(c.value, c.targetValue, 0.5);
     // console.log(c.value); //0.19999999999977042
-    let pointHeight = (0.94 - c.value) * chartCanvas.height;
+    let pointHeight = (0.95 - c.value) * chartCanvas.height;
     // console.log(c.value);
 
     chartCtx.translate(
@@ -173,7 +173,7 @@ function lineUpdateChart(dt) {
       // chartCanvas.height - (chartCanvas.height * 6 / 7 * c.value)
       // (pointHeight > x) ? maxValue : pointHeight;
 
-      clamp(-0.5, 0.94 * chartCanvas.height, pointHeight)
+      clamp(-0.5, 0.95 * chartCanvas.height, pointHeight)
 
     );
 
@@ -205,7 +205,7 @@ function lineUpdateChart(dt) {
     // chartCtx.lineTo(400, 0);
     chartCtx.lineTo(
       lineOffset,
-      (0.94 - c.value) * chartCanvas.height
+      (0.95 - c.value) * chartCanvas.height
       // chartCanvas.height - (chartCanvas.height * 6 / 7 * c.value)
     );
 

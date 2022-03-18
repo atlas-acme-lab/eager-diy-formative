@@ -128,7 +128,7 @@ function updateChart(dt) {
     // c.value = lerp(c.value, c.targetValue, 0.5);
     // console.log(c.value); //0.19999999999977042
     let pointHeight = (0.94 - c.value) * chartCanvas.height;
-    console.log(c.value);
+    // console.log(c.value);
 
     chartCtx.translate(
       lineOffset,

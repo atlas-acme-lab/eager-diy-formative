@@ -6,8 +6,8 @@ function activateTutorial() {
   document.querySelector('#chart-icons').classList.remove('hidden');
 
   // hide user labels
-  document.querySelector('.scanned-chart-title').classList.add('hidden');
-  document.querySelector('.scanned-chart-icons').classList.add('hidden');
+  document.querySelector('#scanned-chart-title').classList.add('hidden');
+  document.querySelector('#scanned-chart-icons').classList.add('hidden');
 
   document.querySelector('#y-axis-labels').innerHTML = `
     <span>4</span>
@@ -67,14 +67,6 @@ function runScan() {
     iconsCtxLine.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
     titleCtxLine.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
   }
-
-  // // THIS IS ALL YOU NEED FOR SCAN
-  // iconsCtx.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
-  // titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
-  //
-  // console.log(iconsCtxLine, titleCtxLine);
-  // iconsCtxLine.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
-  // titleCtxLine.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
 }
 
 //STEP 3 OF THE SCANNING PROCESS
