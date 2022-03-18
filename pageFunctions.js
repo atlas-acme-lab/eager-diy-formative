@@ -1,4 +1,46 @@
-let scanTimer = 3000;
+let scanTimer = 100;
+
+// const colors = ["#EA3942", "#F3D257", "#3D8A75", "#F8AB4F", "#C2D052", "#FD8322", "#FECA0A", "#9AC806", "#6958CE", "#FB0088"]; //orange, yellow, green, purple, pink;
+const colors = ["#FD8322", "#FECA0A", "#9AC806", "#6958CE", "#FB0088"]; //orange, yellow, green, purple, pink;
+let bar0 = 0;
+let bar1 = 1;
+let bar2 = 2;
+let bar3 = 3;
+let bar4 = 4;
+
+function changeBarColor(bar) {
+  console.log("enterfunc")
+  let currentColor;
+  if (bar == "#bar-0") {
+    console.log("enter if")
+    nextColor = colors[(bar0 + 1) % 5];
+    document.querySelector('#bar-0').style.backgroundColor = nextColor;
+    bar0 = (bar0 + 1) % 5;
+  }
+
+  if (bar == "#bar-1") {
+    nextColor = colors[(bar1 + 1) % 5];
+    document.querySelector('#bar-1').style.backgroundColor = nextColor;
+    bar1 = (bar1 + 1) % 5;
+  }
+
+  if (bar == "#bar-2") {
+    nextColor = colors[(bar2 + 1) % 5];
+    document.querySelector('#bar-2').style.backgroundColor = nextColor;
+    bar2 = (bar2 + 1) % 5;
+  }
+
+  if (bar == "#bar-3") {
+    nextColor = colors[(bar3 + 1) % 5];
+    document.querySelector('#bar-3').style.backgroundColor = nextColor;
+    bar3 = (bar3 + 1) % 5;
+  }
+  if (bar == "#bar-4") {
+    nextColor = colors[(bar4 + 1) % 5];
+    document.querySelector('#bar-4').style.backgroundColor = nextColor;
+    bar4 = (bar4 + 1) % 5;
+  }
+}
 
 function activateTutorial() {
   document.querySelector('#bar-chart-view').classList.remove('offscreen');
@@ -26,7 +68,7 @@ function activateTutorial() {
 function resetScanningPage() {
   document.querySelector('#scan-tip').innerHTML = "Flip the paper template, place it on the panel, and press SCAN";
   document.querySelector('#activate-scan').classList.add('hidden');
-  scanTimer = 3000;
+  scanTimer = 100;
 }
 
 
@@ -60,12 +102,12 @@ function runScan() {
 
 
   if (barChartActivated) {
-    iconsCtx.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
-    titleCtx.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
+    titleCtx.drawImage(Beholder.getVideo(), -180, -320, 640, 480);
+    iconsCtx.drawImage(Beholder.getVideo(), -180, -115, 640, 480);
   } else {
     console.log(iconsCtxLine, titleCtxLine);
-    iconsCtxLine.drawImage(Beholder.getVideo(), -300, -192, 640, 480);
-    titleCtxLine.drawImage(Beholder.getVideo(), -310, -398, 640, 480);
+    iconsCtxLine.drawImage(Beholder.getVideo(), -180, -320, 640, 480);
+    titleCtxLine.drawImage(Beholder.getVideo(), -180, -115, 640, 480);
   }
 }
 

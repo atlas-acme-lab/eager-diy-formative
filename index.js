@@ -12,12 +12,12 @@ let config = {
     sizeAfterPerspectiveRemoval: 49,
     area: {
       start: {
-        x: 0.35,
-        y: 0.16
+        x: 0.30,
+        y: 0.23
       },
       end: {
-        x: 0.98,
-        y: 0.85
+        x: 0.88,
+        y: 0.75
       },
     },
   },
@@ -83,6 +83,12 @@ window.onload = () => {
   document.querySelector('#activate-diy-line').addEventListener('click', () => activateScanningView("line"));
   document.querySelector('#activate-scan').addEventListener('click', runScan);
   document.querySelector('#activate-chart').addEventListener('click', activateDIYChart);
+  document.querySelector('#bar-0').addEventListener('click', () => changeBarColor("#bar-0"));
+  document.querySelector('#bar-1').addEventListener('click', () => changeBarColor("#bar-1"));
+  document.querySelector('#bar-2').addEventListener('click', () => changeBarColor("#bar-2"));
+  document.querySelector('#bar-3').addEventListener('click', () => changeBarColor("#bar-3"));
+  document.querySelector('#bar-4').addEventListener('click', () => changeBarColor("#bar-4"));
+
 
   //////
 
