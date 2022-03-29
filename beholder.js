@@ -12,7 +12,7 @@ const maxVH = 258;
 const markerMoveThreshold = 1.5;
 // TODO: init these to be y min
 //Sandra's comment: idk why they are here
-const markerMap = [1, 0 2, 3, 4];
+const markerMap = [1, 0, 2, 3, 4];
 const markerPositions = [0, 0, 0, 0, 0];
 const markerOrigins = [0, 0, 0, 0, 0];
 let markerYMax = 0;
