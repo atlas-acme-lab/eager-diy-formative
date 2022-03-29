@@ -6,7 +6,7 @@ let lineChartActivated = false;
 
 const referenceMarkerBot = 16;
 const referenceMarkerTop = 17;
-const lineMarkerMap = [0, 1, 2, 3, 4];
+const lineMarkerMap = [1, 0, 2, 3, 4];
 const maxVH = 258;
 
 const markerMoveThreshold = 1.5;
